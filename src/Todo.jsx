@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Todo.css";
 import { MdCheck } from "react-icons/md";
 import { MdDeleteForever } from "react-icons/md";
@@ -26,13 +26,17 @@ function Todo() {
     setInputValue(""); //Third Validation
   };
 
-  setInterval(() => {
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString();
-    const formattedTime = now.toLocaleTimeString();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString();
+      const formattedTime = now.toLocaleTimeString();
 
-    setDateTime(`${formattedDate}-${formattedTime}`);
-  }, 1000);
+      setDateTime(`${formattedDate}-${formattedTime}`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="todo-container">
