@@ -18,10 +18,11 @@ function Todo() {
     if (!inputValue) return; //First Validation
 
     if (task.includes(inputValue)) {
+      //Second Validation
       setInputValue("");
       return;
     }
-    //Second Validation
+
     setTask((prevTask) => [...prevTask, inputValue]);
     setInputValue(""); //Third Validation
   };
@@ -37,6 +38,18 @@ function Todo() {
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleOnDelete = (currTask) => {
+    const updatedTask = task.filter((item) => {
+      return item != currTask;
+    });
+
+    setTask(updatedTask);
+  };
+
+  const handleOnClear = () => {
+    setTask([]);
+  };
 
   return (
     <section className="todo-container">
@@ -72,13 +85,19 @@ function Todo() {
                 <button className="check-btn">
                   <MdCheck />
                 </button>
-                <button className="delete-btn">
+                <button
+                  className="delete-btn"
+                  onClick={() => handleOnDelete(currTask)}
+                >
                   <MdDeleteForever />
                 </button>
               </li>
             );
           })}
         </ul>
+      </section>
+      <section>
+        <button className="clear-btn" onClick={handleOnClear}>Clear All</button>
       </section>
     </section>
   );
