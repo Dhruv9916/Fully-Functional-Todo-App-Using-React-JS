@@ -6,6 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 function Todo() {
   const [inputValue, setInputValue] = useState("");
   const [task, setTask] = useState([]);
+  const [dateTime, setDateTime] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -24,10 +25,20 @@ function Todo() {
     setTask((prevTask) => [...prevTask, inputValue]);
     setInputValue(""); //Third Validation
   };
+
+  setInterval(() => {
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString();
+    const formattedTime = now.toLocaleTimeString();
+
+    setDateTime(`${formattedDate}-${formattedTime}`);
+  }, 1000);
+
   return (
     <section className="todo-container">
       <header>
         <h1>Todo List</h1>
+        <h2 className="date-time">{dateTime}</h2>
       </header>
       <section className="form">
         <form onSubmit={handleFormSubmit}>
