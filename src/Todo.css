@@ -77,12 +77,17 @@ form {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px; 
+  width: 100%; 
+  max-width: 500px; 
   background: #f8f9fa;
   color: #333;
   padding: 12px;
   margin-bottom: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word; 
+  overflow: hidden; 
 }
 
 .todo-item span {
